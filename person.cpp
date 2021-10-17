@@ -52,7 +52,7 @@ void Person::printLineage(char dir, int level){
             father->printLineage(dir, level + 1);
         }
     }
-    delete 
+    delete [] temp; //Fixed error, added "delete [] temp" to deallocate line 38  
 }
 
 /* helper function to compute the lineage
