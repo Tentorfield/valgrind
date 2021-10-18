@@ -50,7 +50,7 @@ void PersonList::addPerson(const char* child_name, const char* father_name, cons
 void PersonList::insertIntoList(Person *newPerson){
     if(numPeople == capacity) expand(&theList, &capacity);
 
-    theList[numPeople++] = newPerson;
+    theList[numPeople--] = newPerson; // Fixed error, added "--" since the og "++" would be an error for memory size
 }
 
 void PersonList::printLineage(const char* person){
