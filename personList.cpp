@@ -15,6 +15,7 @@ PersonList::~PersonList(){
     for(int i = 0; i < numPeople; i++){
 	delete theList[i];
     }
+    //Added iterative removal of pointers
     delete [] theList;
 }
 
