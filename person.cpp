@@ -69,11 +69,10 @@ char* Person::compute_relation(int level){
     for(int i = 2; i <= level; i++){
         char *temp2 = new char[strlen("great ") + strlen(temp) + 1];
         strcat(strcpy(temp2, "great "), temp);
+        delete [] temp;//removed temp for it to be assigned to temp2
         temp = temp2;
-        delete [] temp2; //Fixed error, deallocate line 68
     }
     return temp;
-    delete [] temp; //Fixed error, deallocate line 65
 }
 
 /* non-member function which doubles the size of t
@@ -82,7 +81,8 @@ char* Person::compute_relation(int level){
 void expand(Person ***t, int *MAX){
   Person **temp = new Person*[2 * *MAX];
   memcpy(temp, *t, *MAX * sizeof(**t));
+  delete [] *t; //delete *t for it to be assigned by temp
   *MAX *= 2;
   *t = temp;
-  delete [] temp; //Fixed error, deallocate line 81.
+  //delete [] temp; //Fixed error, deallocate line 81.
 }
