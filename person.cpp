@@ -6,18 +6,18 @@ using std::cout;
 using std::endl;
 
 Person::Person(const char *name_, Person* father_, Person* mother_){
-    name = new char[strlen(name_) + 1]; // Potential fix? added " + 1"
+    name = new char[strlen(name_) + 1];
     strcpy(name, name_);
     father = father_;
     mother = mother_;
     capacity = 1;
     numChildren = 0;
     children = new Person*[capacity];
-    //delete[] name;
 }
 
 Person::~Person(){
     delete [] children;//Fixed error, added "[]" to deallocate array pointer for line 15 
+    delete[] name; //maybe
 }
 
 void Person::addChild(Person *newChild){
