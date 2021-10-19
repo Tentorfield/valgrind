@@ -17,7 +17,6 @@ Person::Person(const char *name_, Person* father_, Person* mother_){
 
 Person::~Person(){
     delete [] children;//Fixed error, added "[]" to deallocate array pointer for line 15 
-    delete [] name; //Fixed error, also a data pointer
 }
 
 void Person::addChild(Person *newChild){
