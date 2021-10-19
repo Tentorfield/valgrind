@@ -6,7 +6,7 @@ using std::cout;
 using std::endl;
 
 Person::Person(const char *name_, Person* father_, Person* mother_){
-    name = new char[strlen(name_)];
+    name = new char[strlen(name_) + 1]; // Potential fix? added " + 1"
     strcpy(name, name_);
     father = father_;
     mother = mother_;
@@ -17,7 +17,7 @@ Person::Person(const char *name_, Person* father_, Person* mother_){
 }
 
 Person::~Person(){
-    delete[] children;
+    delete [] children;//Fixed error, added "[]" to deallocate array pointer for line 15 
 }
 
 void Person::addChild(Person *newChild){
@@ -54,6 +54,7 @@ void Person::printLineage(char dir, int level){
             father->printLineage(dir, level + 1);
         }
     }
+    delete [] temp; //Fixed error, added "delete [] temp" to deallocate line 38  
 }
 
 /* helper function to compute the lineage
@@ -63,14 +64,16 @@ void Person::printLineage(char dir, int level){
 char* Person::compute_relation(int level){
     if(level == 0) return strcpy(new char[1], "");
 
-    char *temp = strcpy(new char[strlen("grand") + 1], "grand ");
+    char *temp = strcpy(new char[strlen("grand ") + 1], "grand "); // Fixed error, removed double semi colon
     
     for(int i = 2; i <= level; i++){
         char *temp2 = new char[strlen("great ") + strlen(temp) + 1];
         strcat(strcpy(temp2, "great "), temp);
         temp = temp2;
+        delete [] temp2; //Fixed error, deallocate line 68
     }
     return temp;
+    delete [] temp; //Fixed error, deallocate line 65
 }
 
 /* non-member function which doubles the size of t
@@ -81,4 +84,5 @@ void expand(Person ***t, int *MAX){
   memcpy(temp, *t, *MAX * sizeof(**t));
   *MAX *= 2;
   *t = temp;
+  delete [] temp; //Fixed error, deallocate line 81.
 }
